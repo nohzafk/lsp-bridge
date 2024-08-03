@@ -172,9 +172,13 @@ start the devcontainer and use `file-find` `/docker:user@container:/path/to/file
 more detail please refer to [devcontainer-feature-emacs-lsp-bridge](https://github.com/nohzafk/devcontainer-feature-emacs-lsp-bridge).
 
 If you use `apheleia` as formatter, `lsp-bridge` now support auto formatting file on devcontainer.
+```elisp
+;; setup PATH for remote command execution
+(with-eval-after-load 'tramp
+  (add-to-list 'tramp-remote-path "~/.nix-profile/bin")
+  (add-to-list 'tramp-remote-path 'tramp-own-remote-path))
 
-```elsip
-(use-package! apheleia
+(use-package apheleia
   :config
   ;; which formatter to use
   (setf (alist-get 'python-mode apheleia-mode-alist) 'ruff)
@@ -264,7 +268,7 @@ lsp-bridge provides support for more than two language servers for many language
 - `lsp-bridge-csharp-lsp-server`: C# language server, you can choose `omnisharp-mono`, `omnisharp-dotnet` or `csharp-ls`, note that you need to give **execute permissions** to the OmniSharp file
 - `lsp-bridge-python-multi-lsp-server`: Python multi-language servers, you can choose `basedpyright_ruff`, `pyright_ruff`, `jedi_ruff`, `python-ms_ruff`, `pylsp_ruff`
 - `lsp-bridge-nix-lsp-server`: Nix language server, you can choose `rnix-lsp`, `nixd` or `nil`
-- `lsp-bridge-markdown-lsp-server`: Markdown language server, you can choose `vale-ls` `nil` or `marksman` 
+- `lsp-bridge-markdown-lsp-server`: Markdown language server, you can choose `vale-ls` or `marksman` 
 - `lsp-bridge-lua-lsp-server`: Lua language server, you can choose `sumneko` or `lua-lsp` 
 
 ## Options
